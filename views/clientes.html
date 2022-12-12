@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>SysAdm</title>
+</head>
+    
+<body>
+    <!--MENU BOOTSTRAP-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img class="logotipo" src="./Image/Home/logo.png" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Views/proveedores.html">Proveedores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Views/clientes.html">Clientes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Compras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Ventas</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Libros
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Compras</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Ventas</a></li>
+                </ul>
+              </li>
+            </ul>
+           
+          </div>
+        </div> <!--FIN DEL CONTAINER-->
+      </nav>
+
+      <main>
+        <div class="container" id="app">
+            <br>
+            <h2>Clientes</h2>
+            <section v-if="errored">
+              <p>Lo sentimos, no es posible obtener la información en este momento, por favor intente nuevamente mas tarde</p>  
+             </section>
+             <section v-else>
+                 <div v-if="loading">Cargando....
+                     <div class="spinner-border" role="status">
+                         <span class="sr-only"></span>
+                     </div>
+                 </div>
+                 <div v-else>
+                     <a href="createCliente.html" class="btn btn-success">Nuevo</a>
+                     <br><br>
+ 
+
+                      <div id="app" class="table-responsive">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Código</th>
+                                <th>Apellido y Nombre</th>
+                                <th>Iva</th>
+                                <th>Teléfono</th>
+                                <th>Eliminar </th>
+                                <th>Modificar</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="cliente in clientes"   class="">
+                                    <td>{{cliente.id}}</td>
+                                    <td>{{cliente.codigo}}</td>
+                                    <td>{{cliente.apellidoNombre}}</td>
+                                    <td>{{cliente.iva}}</td>
+                                    <td>{{cliente.telefono}}</td>
+                                                        
+                                    <td>
+                                        <button @click=deleteCliente(cliente.id)>
+                                            <img src="./Image/App/delete.png" alt="">
+                                        </button>  
+                                    </td>
+                                    <td>
+                                        <a :href="'updateCliente.html?id='+cliente.id+'&codigo='+cliente.codigo+'&nombre='+cliente.apellidoNombre+'&iva='+cliente.iva+'&telefono='+cliente.telefono" >
+                                            <img class= "boton"   src="./Image/App/edit.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+
+                              
+                            </tbody>
+                          </table>
+                      </div> <!--FIN CLASE TABLA-->
+              </div> <!--FIN DIV ELSE-->
+        </div> <!--FIN CLASE CONTAINER MAIN-->
+       
+
+      </main>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./js/clientes.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    
+</body>
+</html>
